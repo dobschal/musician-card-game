@@ -78,7 +78,7 @@ createElement({
             <p>
                 <img src="/song-ball-and-biscuit.png" alt="Song Ball And Biscuit" class="tutorial-example">
                 <img src="/musician-the-white-stripes-jack-white.png" alt="Musician Jack White" class="tutorial-example">
-                <img src="/instrument-guitar.png" alt="Instrument Guitar" class="tutorial-example">
+                <img src="/instrument-guitar-montgomery-ward-airline.png" alt="Instrument Guitar" class="tutorial-example">
                 <img src="/instrument-vocals.png" alt="Instrument Vocals" class="tutorial-example">
                 <img src="/instrument-drums.png" alt="Instrument Drums" class="tutorial-example">
                 <img src="/musician-the-white-stripes-meg-white.png" alt="Musician Meg White" class="tutorial-example">            

@@ -156,7 +156,7 @@ export default class extends EventHandler<Card> {
     renderHandCards() {
         const handCardsElement = createElement({
             target: this.uiRoot,
-            className: "hand-cards hand-cards-" + this.handCards.length
+            className: "hand-cards hand-cards-" + this.handCards.length + (this.handCards.length > 17 ? " overflow" : ""),
         });
         const hasNoSongPlayedYet = this.playedCards.every(zone => zone.length === 0);
         this.handCards.forEach((card) => {
@@ -167,10 +167,6 @@ export default class extends EventHandler<Card> {
             }
             cardElement.addEventListener("click", () => {
                 if (this.isTakingDiscardStack || !this.isHuman || !this.isActive) {
-                    return;
-                }
-                if (!this.hasDrawnCard) {
-                    showMessage("Du musst zu Beginn deines Zuges eine Karte ziehen.", "error");
                     return;
                 }
                 if (this.isInEndPhase) {

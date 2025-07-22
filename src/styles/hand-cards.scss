@@ -13,6 +13,14 @@
     }
   }
 
+  &.overflow {
+    display: flex;
+
+    .card {
+      position: initial;
+    }
+  }
+
   &.hand-cards-1 {
     width: calc(var(--card-width) * 0.63);
 
@@ -594,4 +602,256 @@
     }
   }
 
+  &.hand-cards-15 {
+    width: calc(15 * var(--card-width) * 0.63);
+
+    .card:nth-child(1) {
+      left: calc(var(--card-width) * 0.5);
+      transform: rotate(-45deg);
+    }
+
+    .card:nth-child(2) {
+      left: calc(var(--card-width) * 1);
+      transform: rotate(-40deg);
+    }
+
+    .card:nth-child(3) {
+      left: calc(var(--card-width) * 1.5);
+      transform: rotate(-35deg);
+    }
+
+    .card:nth-child(4) {
+      left: calc(var(--card-width) * 2);
+      transform: rotate(-30deg);
+    }
+
+    .card:nth-child(5) {
+      left: calc(var(--card-width) * 2.5);
+      transform: rotate(-25deg);
+    }
+
+    .card:nth-child(6) {
+      left: calc(var(--card-width) * 3);
+      transform: rotate(-20deg);
+    }
+
+    .card:nth-child(7) {
+      left: calc(var(--card-width) * 3.5);
+      transform: rotate(-15deg);
+    }
+
+    .card:nth-child(8) {
+      left: calc(var(--card-width) * 4);
+      transform: rotate(-10deg);
+    }
+
+    .card:nth-child(9) {
+      left: calc(var(--card-width) * 4.5);
+      transform: rotate(-5deg);
+    }
+
+    .card:nth-child(10) {
+      left: calc(var(--card-width) * 5);
+      transform: rotate(0deg);
+    }
+
+    .card:nth-child(11) {
+      left: calc(var(--card-width) * 5.5);
+      transform: rotate(5deg);
+    }
+
+    .card:nth-child(12) {
+      left: calc(var(--card-width) * 6);
+      transform: rotate(10deg);
+    }
+
+    .card:nth-child(13) {
+      left: calc(var(--card-width) * 6.5);
+      transform: rotate(15deg);
+    }
+
+    .card:nth-child(14) {
+      left: calc(var(--card-width) * 7);
+      transform: rotate(20deg);
+    }
+
+    .card:nth-child(15) {
+      left: calc(var(--card-width) * 7.5);
+      transform: rotate(25deg);
+    }
+  }
+
+  &.hand-cards-16 {
+    width: calc(16 * var(--card-width) * 0.63);
+
+    .card:nth-child(1) {
+      left: calc(var(--card-width) * 0.5);
+      transform: rotate(-50deg);
+    }
+
+    .card:nth-child(2) {
+      left: calc(var(--card-width) * 1);
+      transform: rotate(-45deg);
+    }
+
+    .card:nth-child(3) {
+      left: calc(var(--card-width) * 1.5);
+      transform: rotate(-40deg);
+    }
+
+    .card:nth-child(4) {
+      left: calc(var(--card-width) * 2);
+      transform: rotate(-35deg);
+    }
+
+    .card:nth-child(5) {
+      left: calc(var(--card-width) * 2.5);
+      transform: rotate(-30deg);
+    }
+
+    .card:nth-child(6) {
+      left: calc(var(--card-width) * 3);
+      transform: rotate(-25deg);
+    }
+
+    .card:nth-child(7) {
+      left: calc(var(--card-width) * 3.5);
+      transform: rotate(-20deg);
+    }
+
+    .card:nth-child(8) {
+      left: calc(var(--card-width) * 4);
+      transform: rotate(-15deg);
+    }
+
+    .card:nth-child(9) {
+      left: calc(var(--card-width) * 4.5);
+      transform: rotate(-10deg);
+    }
+
+    .card:nth-child(10) {
+      left: calc(var(--card-width) * 5);
+      transform: rotate(-5deg);
+    }
+
+    .card:nth-child(11) {
+      left: calc(var(--card-width) * 5.5);
+      transform: rotate(0deg);
+    }
+
+    .card:nth-child(12) {
+      left: calc(var(--card-width) * 6);
+      transform: rotate(5deg);
+    }
+
+    .card:nth-child(13) {
+      left: calc(var(--card-width) * 6.5);
+      transform: rotate(10deg);
+    }
+
+    .card:nth-child(14) {
+      left: calc(var(--card-width) * 7);
+      transform: rotate(15deg);
+    }
+
+    .card:nth-child(15) {
+      left: calc(var(--card-width) * 7.5);
+      transform: rotate(20deg);
+    }
+
+    .card:nth-child(16) {
+      left: calc(var(--card-width) * 8);
+      transform: rotate(25deg);
+
+    }
+  }
+
+  &.hand-cards-17 {
+    width: calc(17 * var(--card-width) * 0.63);
+
+    .card:nth-child(1) {
+      left: calc(var(--card-width) * 0.5);
+      transform: rotate(-55deg);
+    }
+
+    .card:nth-child(2) {
+      left: calc(var(--card-width) * 1);
+      transform: rotate(-50deg);
+    }
+
+    .card:nth-child(3) {
+      left: calc(var(--card-width) * 1.5);
+      transform: rotate(-45deg);
+    }
+
+    .card:nth-child(4) {
+      left: calc(var(--card-width) * 2);
+      transform: rotate(-40deg);
+    }
+
+    .card:nth-child(5) {
+      left: calc(var(--card-width) * 2.5);
+      transform: rotate(-35deg);
+    }
+
+    .card:nth-child(6) {
+      left: calc(var(--card-width) * 3);
+      transform: rotate(-30deg);
+    }
+
+    .card:nth-child(7) {
+      left: calc(var(--card-width) * 3.5);
+      transform: rotate(-25deg);
+    }
+
+    .card:nth-child(8) {
+      left: calc(var(--card-width) * 4);
+      transform: rotate(-20deg);
+    }
+
+    .card:nth-child(9) {
+      left: calc(var(--card-width) * 4.5);
+      transform: rotate(-15deg);
+    }
+
+    .card:nth-child(10) {
+      left: calc(var(--card-width) * 5);
+      transform: rotate(-10deg);
+    }
+
+    .card:nth-child(11) {
+      left: calc(var(--card-width) * 5.5);
+      transform: rotate(-5deg);
+    }
+
+    .card:nth-child(12) {
+      left: calc(var(--card-width) * 6);
+      transform: rotate(0deg);
+    }
+
+    .card:nth-child(13) {
+      left: calc(var(--card-width) * 6.5);
+      transform: rotate(5deg);
+    }
+
+    .card:nth-child(14) {
+      left: calc(var(--card-width) * 7);
+      transform: rotate(10deg);
+    }
+
+    .card:nth-child(15) {
+      left: calc(var(--card-width) * 7.5);
+      transform: rotate(15deg);
+    }
+
+    .card:nth-child(16) {
+      left: calc(var(--card-width) * 8);
+      transform: rotate(20deg);
+    }
+
+    .card:nth-child(17) {
+      left: calc(var(--card-width) * 8.5);
+      transform: rotate(25deg);
+    }
+  }
 }
