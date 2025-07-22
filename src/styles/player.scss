@@ -1,0 +1,41 @@
+.player {
+  position: absolute;
+
+  .played-cards-wrapper {
+    bottom: calc(var(--card-height) + var(--space-2));
+  }
+
+  .points {
+    position: absolute;
+    bottom: var(--space-2);
+    left: 0;
+    transform: translateX(-100%);
+    font-size: 1.2rem;
+    color: white;
+    padding: var(--space-1) var(--space-2);
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+  }
+}
+
+#player1 {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#player2 {
+  top: 0;
+  left: 50%;
+  transform: rotate(180deg) translateX(50%);
+
+  .points {
+    transform: rotate(180deg) translateX(100%);
+  }
+
+  .card {
+    &:hover {
+      transform: rotate(180deg) scale(1.25);
+    }
+  }
+}

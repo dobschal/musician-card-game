@@ -1,0 +1,82 @@
+.played-cards-wrapper {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: calc(15 * var(--space-2));
+  padding-right: calc(15 * var(--space-2));
+
+  &.active {
+    .played-cards {
+      animation: pulsate-red 2s infinite;
+
+      &:hover {
+        background: red;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .played-cards {
+    width: var(--card-width);
+    height: var(--card-height);
+    border-radius: 6px;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.15);
+
+    &.completed {
+      .card {
+        background-color: rgba(0, 0, 0, 0.3);
+        box-shadow: 2px 2px 8px green;
+      }
+    }
+
+    .card {
+      position: absolute;
+
+      &:hover {
+        z-index: 81 !important;
+      }
+    }
+
+    .card:nth-child(1) {
+      left: 0;
+      z-index: 73;
+    }
+
+    .card:nth-child(2) {
+      left: calc(var(--space-2) * 2);
+      z-index: 74;
+    }
+
+    .card:nth-child(3) {
+      left: calc(var(--space-2) * 4);
+      z-index: 75;
+    }
+
+    .card:nth-child(4) {
+      left: calc(var(--space-2) * 6);
+      z-index: 76;
+    }
+
+    .card:nth-child(5) {
+      left: calc(var(--space-2) * 8);
+      z-index: 77;
+    }
+
+    .card:nth-child(6) {
+      left: calc(var(--space-2) * 10);
+      z-index: 78;
+    }
+
+    .card:nth-child(7) {
+      left: calc(var(--space-2) * 12);
+      z-index: 79;
+    }
+
+    .card:nth-child(8) {
+      left: calc(var(--space-2) * 14);
+      z-index: 80;
+    }
+  }
+}

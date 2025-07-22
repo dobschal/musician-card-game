@@ -1,0 +1,30 @@
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.message-wrapper {
+  position: absolute;
+  bottom: calc((var(--space-2) + var(--card-height)) * 2);
+  left: var(--space-2);
+  max-width: 25%;
+}
+
+.message {
+  font-size: 1rem;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(5px);
+  padding: calc(var(--space-1) * 1.5) var(--space-2);
+  border-radius: 6px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.75);
+  margin-top: 1rem;
+  animation: fade-out 7s ease-in-out forwards;
+}
