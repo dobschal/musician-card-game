@@ -161,6 +161,15 @@ export default class extends EventHandler<Card> {
         const hasNoSongPlayedYet = this.playedCards.every(zone => zone.length === 0);
         this.handCards.forEach((card) => {
             const cardElement = card.render(this.isHuman ? CardFace.Up : CardFace.Down);
+            if (this.selectedCard) {
+                if (this.selectedCard === card) {
+                    cardElement.classList.add("selected");
+                    cardElement.classList.remove("not-selected");
+                } else {
+                    cardElement.classList.add("not-selected");
+                    cardElement.classList.remove("selected");
+                }
+            }
             handCardsElement.appendChild(cardElement);
             if (this.isInEndPhase || (card instanceof Song && hasNoSongPlayedYet && this.hasDrawnCard)) {
                 cardElement.classList.add("pulsed");
@@ -325,6 +334,7 @@ export default class extends EventHandler<Card> {
                     .some(musician => {
                         const musicianIsNeeded = musician.instruments.some(instrument => song.instruments.includes(instrument));
                         if (!musicianIsNeeded) {
+                            console.log(`Musician ${musician.name} is not needed for song ${song.name}`);
                             return false;
                         }
                         return this.handCards
@@ -341,10 +351,10 @@ export default class extends EventHandler<Card> {
                 break;
             case card instanceof Instrument:
                 if (playedCards.length === 0) {
-                    return "Instrumente können nur gespielt werden, wenn ein Song in der Zone ist.";
+                    return "Instrumente können nur gespielt werden, wenn ein Song und dazugehöriger Musiker ausliegt.";
                 }
                 if (!playedCards.some(c => c instanceof Musician && c.instruments.includes(card.type))) {
-                    return "Instrumente können nur gespielt werden, wenn ein Musiker in der Zone ist, der dieses Instrument spielt.";
+                    return "Instrumente können nur gespielt werden, wenn ein Musiker ausliegt, der dieses Instrument spielt.";
                 }
                 if (card.type === InstrumentType.Bass && !playedCards.some(c => c instanceof Song && c.instruments.includes(InstrumentType.Bass))) {
                     return "Bass-Instrumente können nur gespielt werden, wenn der Song in der Zone auch ein Bass-Instrument braucht.";

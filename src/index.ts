@@ -22,11 +22,16 @@ const players = [
         className: "player",
         target: UI_ROOT
     }), "blue", drawStack, discardStack),
-    new Player("Computer", drawStack.drawCards(AMOUNT_START_HAND), false, createElement({
+    new Player("Computer (1)", drawStack.drawCards(AMOUNT_START_HAND), false, createElement({
         id: "player2",
         className: "player",
         target: UI_ROOT
-    }), "red", drawStack, discardStack)
+    }), "red", drawStack, discardStack),
+    new Player("Computer (2)", drawStack.drawCards(AMOUNT_START_HAND), false, createElement({
+        id: "player3",
+        className: "player",
+        target: UI_ROOT
+    }), "green", drawStack, discardStack)
 ];
 
 delay(1000).then(() => {

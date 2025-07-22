@@ -16,6 +16,10 @@
     background-color: rgba(0, 0, 0, 0.3);
     border-radius: 6px;
   }
+
+  .card.not-selected {
+    opacity: 0;
+  }
 }
 
 #player1 {
@@ -26,8 +30,8 @@
 
 #player2 {
   top: 0;
-  left: 50%;
-  transform: rotate(180deg) translateX(50%);
+  left: 25%;
+  transform: rotate(180deg) translateX(50%) scale(0.5);
 
   .points {
     transform: rotate(180deg) translateX(100%);
@@ -35,7 +39,23 @@
 
   .card {
     &:hover {
-      transform: rotate(180deg) scale(1.25);
+      transform: rotate(180deg) scale(2);
+    }
+  }
+}
+
+#player3 {
+  top: 0;
+  left: 75%;
+  transform: rotate(180deg) translateX(50%) scale(0.5);
+
+  .points {
+    transform: rotate(180deg) translateX(100%);
+  }
+
+  .card {
+    &:hover {
+      transform: rotate(180deg) scale(2);
     }
   }
 }
