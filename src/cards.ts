@@ -320,7 +320,8 @@ export const songs = [
     new Song(
         "Twist And Shout",
         Band.Beatles,
-        "song-twist-and-shout.png"
+        "song-twist-and-shout.png",
+        [InstrumentType.Guitar, InstrumentType.Drums, InstrumentType.Vocals, InstrumentType.Bass]
     ),
     new Song(
         "Whole Lotta Love",
