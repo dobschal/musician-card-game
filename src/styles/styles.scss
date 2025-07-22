@@ -1,9 +1,9 @@
-@import "message";
-@import "hand-cards";
-@import "played-cards";
-@import "player";
-@import "buttons";
-@import "tutorial";
+@use "message";
+@use "hand-cards";
+@use "played-cards";
+@use "player";
+@use "buttons";
+@use "tutorial";
 
 :root {
   font-size: 16px;

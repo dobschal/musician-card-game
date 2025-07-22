@@ -1,0 +1,8 @@
+services:
+  musician-card-game:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "3007:80"
