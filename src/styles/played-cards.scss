@@ -78,5 +78,10 @@
       left: calc(var(--space-2) * 14);
       z-index: 80;
     }
+
+    .card:nth-child(9) {
+      left: calc(var(--space-2) * 16);
+      z-index: 81;
+    }
   }
 }

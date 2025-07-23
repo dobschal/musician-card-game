@@ -6,6 +6,7 @@ import ensure from "./helpers/ensure.ts";
 import showMessage from "./helpers/showMessage.ts";
 import Card, {CardFace} from "./classes/Card.ts";
 import delay from "./helpers/delay.ts";
+import type {Optional} from "./classes/Optional.ts";
 
 
 console.log("Game started...");
@@ -47,6 +48,17 @@ players.forEach((player) => {
 
         if (player.handCards.length === 0) {
             showMessage(`${player.name} hat das Spiel beendet!`, "info");
+            let bestPlayer: Optional<Player>;
+            players.forEach((p) => {
+                if (!bestPlayer) {
+                    bestPlayer = p;
+                } else {
+                    if (p.calculatePoints() > bestPlayer.calculatePoints()) {
+                        bestPlayer = p;
+                    }
+                }
+            });
+            alert(`\`${player.name} hat das Spiel beendet! ${bestPlayer?.name} hat gewonnen mit ${bestPlayer?.calculatePoints()} Punkten!`);
             return;
         }
 
@@ -68,7 +80,6 @@ createElement({
     className: "tutorial",
     innerHTML: `
         <div>
-            <button onclick="document.querySelector('.tutorial').remove()" style="float:right">Schließen</button>
             <h2>Willkommen zum Spiel Kafümu!</h2>
             <p>Ziel des Kartenspiels Kafümu ist es Songs mit dazugehörigen Musikern und Instrumenten vor sich auszulegen.</p>
             <p>Jede(r) Spieler*in startet mit 11 Handkarten und ist nacheinander im Uhrzeigersinn am Zug.<br>
@@ -122,7 +133,7 @@ createElement({
             </p>   
             <h3>Der Name</h3>
             <p>Kafümu steht für "<b>KA</b>rtenspiel <b>FÜ</b>r <b>MU</b>siker*innen.</p>
-            <button onclick="document.querySelector('.tutorial').remove()" style="float:right">X</button>
+            <button onclick="document.querySelector('.tutorial').remove()" style="float:right">Spiel starten</button>
         </div>
     `
 });

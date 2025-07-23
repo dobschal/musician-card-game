@@ -10,7 +10,10 @@ import showMessage from "../helpers/showMessage.ts";
 import type Stack from "./Stack.ts";
 import delay from "../helpers/delay.ts";
 
+let __playerId = 0;
+
 export default class extends EventHandler<Card> {
+    id: number = __playerId++;
     name: string;
     handCards: Array<Card>;
     playedCards: Array<Array<Card>> = [

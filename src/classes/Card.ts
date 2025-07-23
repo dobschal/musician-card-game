@@ -1,5 +1,7 @@
 import imageExists from "../helpers/imageExists.ts";
 
+let __cardId = 0;
+
 export enum CardFace {
     Up = "face-up",
     Down = "face-down",
@@ -17,6 +19,7 @@ export default class Card {
     name: string;
     imageUrl: string;
     imageExists: boolean = false;
+    id: number = __cardId++;
 
     constructor(cardType: CardType, name: string, imageUrl: string) {
         this.cardType = cardType;
