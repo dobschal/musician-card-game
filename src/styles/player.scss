@@ -2,7 +2,7 @@
   position: absolute;
 
   .played-cards-wrapper {
-    bottom: calc(var(--card-height) + var(--space-2));
+    bottom: calc(var(--card-height) + var(--space-2) * 2);
   }
 
   .points {
@@ -29,10 +29,9 @@
 }
 
 #player2 {
-  top: 0%;
+  top: 0;
   left: 25%;
-  transform-origin: left top;
-  transform: rotate(150deg) translate(0%, -100%) scale(0.5);
+  transform: rotate(180deg) translateX(50%) scale(0.5);
 
   .points {
     transform: rotate(180deg) translateX(100%);
@@ -48,8 +47,7 @@
 #player3 {
   top: 0;
   left: 75%;
-  transform-origin: left top;
-  transform: rotate(210deg) translate(-25%, -100%) scale(0.5);
+  transform: rotate(180deg) translateX(50%) scale(0.5);
 
   .points {
     transform: rotate(180deg) translateX(100%);

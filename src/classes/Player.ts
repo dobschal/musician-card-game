@@ -150,13 +150,39 @@ export default class extends EventHandler<Card> {
     }
 
     renderHandCards() {
+        const rotationPerCard = 5;
+        const rotationStart = -((this.handCards.length - 1) * rotationPerCard) / 2;
+        const widthPerCard = Math.min(window.innerWidth / this.handCards.length, 50);
         const handCardsElement = createElement({
             target: this.uiRoot,
-            className: "hand-cards hand-cards-" + this.handCards.length + (this.handCards.length > 17 ? " overflow" : ""),
+            className: "hand-cards",
+            style: `width: ${this.handCards.length * widthPerCard}px`
         });
         const hasNoSongPlayedYet = this.playedCards.every(zone => zone.length === 0);
-        this.handCards.forEach((card) => {
+        this.handCards.forEach((card, index) => {
             const cardElement = card.render(this.isHuman ? CardFace.Up : CardFace.Down);
+            cardElement.style.transform = `rotate(${rotationStart + index * rotationPerCard}deg)`;
+            cardElement.style.left = `${(index * widthPerCard)}px`;
+            // apply some arc offset to the top value
+            cardElement.style.top = `${(Math.abs(index - this.handCards.length / 2) * 5) - 25}px`;
+            cardElement.addEventListener("mouseenter", () => {
+                let isBeforeHoveredCard = true;
+                (Array.from(handCardsElement.children) as Array<HTMLElement>).forEach((el: HTMLElement) => {
+                    if (isBeforeHoveredCard) {
+                        el.style.left = `${(Array.from(handCardsElement.children).indexOf(el) * widthPerCard)}px`;
+                    } else {
+                        el.style.left = `${(Array.from(handCardsElement.children).indexOf(el) * widthPerCard) + widthPerCard + 10}px`;
+                    }
+                    if (el === cardElement) {
+                        isBeforeHoveredCard = false;
+                    }
+                });
+            });
+            cardElement.addEventListener("mouseleave", () => {
+                (Array.from(handCardsElement.children) as Array<HTMLElement>).forEach((el: HTMLElement) => {
+                    el.style.left = `${(Array.from(handCardsElement.children).indexOf(el) * widthPerCard)}px`;
+                });
+            });
             if (this.selectedCard) {
                 if (this.selectedCard === card) {
                     cardElement.classList.add("selected");
