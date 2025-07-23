@@ -48,8 +48,6 @@ export default class extends EventHandler<Card> {
         this.handleTakeDiscardStack();
     }
 
-    // TODO: Beim Beenden des Zuges und invaliden state --> allow to move all cards back --> or check that no invalid state is possible
-
     handleCardDraw() {
         this.drawStack.onClick(() => {
             if (!this.isActive || !this.isHuman || this.isInEndPhase || this.hasDrawnCard) return;
@@ -114,8 +112,6 @@ export default class extends EventHandler<Card> {
         this.renderPoints();
         return this.uiRoot;
     }
-
-    // TODO: Having a song complete with the original band should give way more points
 
     calculatePoints(): number {
         const points = this.playedCards.reduce((acc, zone) => {
@@ -401,6 +397,7 @@ export default class extends EventHandler<Card> {
         const card = this.drawStack.drawCard();
         if (card) {
             this.addHandCards([card]);
+            console.log(`Bot ${this.name} drew a card: ${card.name}`);
             await delay(1000); // Simulate thinking time
         }
         const song = this.handCards.find(c => c instanceof Song);
@@ -443,7 +440,7 @@ export default class extends EventHandler<Card> {
         }
         await delay(1000); // Simulate thinking time
         const cardToDiscard = this.handCards[Math.floor(Math.random() * this.handCards.length)];
-        this.handCards = this.handCards.filter(c => c !== card);
+        this.handCards = this.handCards.filter(c => c !== cardToDiscard);
         this.emit("endTurn", cardToDiscard);
     }
 }

@@ -240,34 +240,56 @@ export const musicians: Array<Musician> = [
 ];
 
 export const instruments: Array<Instrument> = [];
-for (let i = 0; i < 12; i++) {
-    instruments.push(new Instrument(InstrumentType.Vocals, "Vocals", "instrument-vocals.png"));
-    instruments.push(new Instrument(InstrumentType.Drums, "Drums", "instrument-drums.png"));
-}
+
+instruments.push(new Instrument(InstrumentType.Vocals, "Shure SM58", "instrument-vocals-sm58.png"));
+instruments.push(new Instrument(InstrumentType.Vocals, "Shure SM58", "instrument-vocals-sm58.png"));
+instruments.push(new Instrument(InstrumentType.Vocals, "Shure SM58", "instrument-vocals-sm58.png"));
+instruments.push(new Instrument(InstrumentType.Vocals, "Shure SM7B", "instrument-vocals-sm7b.png"));
+instruments.push(new Instrument(InstrumentType.Vocals, "Shure SM7B", "instrument-vocals-sm7b.png"));
+instruments.push(new Instrument(InstrumentType.Vocals, "Shure SM7B", "instrument-vocals-sm7b.png"));
+instruments.push(new Instrument(InstrumentType.Vocals, "AKG C414", "instrument-vocals-c414.png"));
+instruments.push(new Instrument(InstrumentType.Vocals, "AKG C414", "instrument-vocals-c414.png"));
+instruments.push(new Instrument(InstrumentType.Vocals, "AKG C414", "instrument-vocals-c414.png"));
+instruments.push(new Instrument(InstrumentType.Vocals, "RE20", "instrument-vocals-re20.png"));
+instruments.push(new Instrument(InstrumentType.Vocals, "RE20", "instrument-vocals-re20.png"));
+instruments.push(new Instrument(InstrumentType.Vocals, "RE20", "instrument-vocals-re20.png"));
+
+instruments.push(new Instrument(InstrumentType.Drums, "Ludwig Drums", "instrument-drums-ludwig.png"));
+instruments.push(new Instrument(InstrumentType.Drums, "Ludwig Drums", "instrument-drums-ludwig.png"));
+instruments.push(new Instrument(InstrumentType.Drums, "Ludwig Drums", "instrument-drums-ludwig.png"));
+instruments.push(new Instrument(InstrumentType.Drums, "Ludwig Drums", "instrument-drums-ludwig.png"));
+instruments.push(new Instrument(InstrumentType.Drums, "Premier Drums", "instrument-drums-premier.png"));
+instruments.push(new Instrument(InstrumentType.Drums, "Premier Drums", "instrument-drums-premier.png"));
+instruments.push(new Instrument(InstrumentType.Drums, "Premier Drums", "instrument-drums-premier.png"));
+instruments.push(new Instrument(InstrumentType.Drums, "Premier Drums", "instrument-drums-premier.png"));
+instruments.push(new Instrument(InstrumentType.Drums, "TAMA Drums", "instrument-drums-tama.png"));
+instruments.push(new Instrument(InstrumentType.Drums, "TAMA Drums", "instrument-drums-tama.png"));
+instruments.push(new Instrument(InstrumentType.Drums, "TAMA Drums", "instrument-drums-tama.png"));
+instruments.push(new Instrument(InstrumentType.Drums, "TAMA Drums", "instrument-drums-tama.png"));
 
 instruments.push(new Instrument(InstrumentType.Bass, "Fender Cabronita", "instrument-bass-cabronita.png"));
-instruments.push(new Instrument(InstrumentType.Bass, "Höfner 500/1", "instrument-bass-hoefner.png"));
-instruments.push(new Instrument(InstrumentType.Bass, "Fender Precision Bass", "instrument-bass-precision.png"));
-instruments.push(new Instrument(InstrumentType.Bass, "Gibson Thunderbird", "instrument-bass-thunderbird.png"));
 instruments.push(new Instrument(InstrumentType.Bass, "Fender Cabronita", "instrument-bass-cabronita.png"));
 instruments.push(new Instrument(InstrumentType.Bass, "Höfner 500/1", "instrument-bass-hoefner.png"));
+instruments.push(new Instrument(InstrumentType.Bass, "Höfner 500/1", "instrument-bass-hoefner.png"));
+instruments.push(new Instrument(InstrumentType.Bass, "Fender Precision Bass", "instrument-bass-precision.png"));
+instruments.push(new Instrument(InstrumentType.Bass, "Fender Precision Bass", "instrument-bass-precision.png"));
 instruments.push(new Instrument(InstrumentType.Bass, "Fender Precision Bass", "instrument-bass-precision.png"));
 instruments.push(new Instrument(InstrumentType.Bass, "Gibson Thunderbird", "instrument-bass-thunderbird.png"));
-instruments.push(new Instrument(InstrumentType.Bass, "Fender Precision Bass", "instrument-bass-precision.png"));
+instruments.push(new Instrument(InstrumentType.Bass, "Gibson Thunderbird", "instrument-bass-thunderbird.png"));
 instruments.push(new Instrument(InstrumentType.Bass, "Gibson Thunderbird", "instrument-bass-thunderbird.png"));
 
-instruments.push(new Instrument(InstrumentType.Guitar, "Fender Stratocaster", "instrument-guitar-stratocaster.png"));
 instruments.push(new Instrument(InstrumentType.Guitar, "Fender Telecaster", "instrument-guitar-telecaster.png"));
-instruments.push(new Instrument(InstrumentType.Guitar, "Gibson SG", "instrument-guitar-sg.png"));
+instruments.push(new Instrument(InstrumentType.Guitar, "Fender Telecaster", "instrument-guitar-telecaster.png"));
+instruments.push(new Instrument(InstrumentType.Guitar, "Fender Telecaster", "instrument-guitar-telecaster.png"));
 instruments.push(new Instrument(InstrumentType.Guitar, "Montgomery Ward Airline", "instrument-guitar-montgomery-ward-airline.png"));
-instruments.push(new Instrument(InstrumentType.Guitar, "Gibson Les Paul", "instrument-guitar-les-paul.png"));
-instruments.push(new Instrument(InstrumentType.Guitar, "Fender Stratocaster", "instrument-guitar-stratocaster.png"));
-instruments.push(new Instrument(InstrumentType.Guitar, "Fender Telecaster", "instrument-guitar-telecaster.png"));
-instruments.push(new Instrument(InstrumentType.Guitar, "Gibson SG", "instrument-guitar-sg.png"));
 instruments.push(new Instrument(InstrumentType.Guitar, "Montgomery Ward Airline", "instrument-guitar-montgomery-ward-airline.png"));
-instruments.push(new Instrument(InstrumentType.Guitar, "Gibson Les Paul", "instrument-guitar-les-paul.png"));
 instruments.push(new Instrument(InstrumentType.Guitar, "Fender Stratocaster", "instrument-guitar-stratocaster.png"));
-instruments.push(new Instrument(InstrumentType.Guitar, "Fender Telecaster", "instrument-guitar-telecaster.png"));
+instruments.push(new Instrument(InstrumentType.Guitar, "Fender Stratocaster", "instrument-guitar-stratocaster.png"));
+instruments.push(new Instrument(InstrumentType.Guitar, "Fender Stratocaster", "instrument-guitar-stratocaster.png"));
+instruments.push(new Instrument(InstrumentType.Guitar, "Gibson SG", "instrument-guitar-sg.png"));
+instruments.push(new Instrument(InstrumentType.Guitar, "Gibson SG", "instrument-guitar-sg.png"));
+instruments.push(new Instrument(InstrumentType.Guitar, "Gibson Les Paul", "instrument-guitar-les-paul.png"));
+instruments.push(new Instrument(InstrumentType.Guitar, "Gibson Les Paul", "instrument-guitar-les-paul.png"));
 
 export const songs = [
     new Song(

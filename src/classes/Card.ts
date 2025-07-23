@@ -9,6 +9,7 @@ export enum CardType {
     Musician,
     Instrument,
     Song,
+    Action
 }
 
 export default class Card {
