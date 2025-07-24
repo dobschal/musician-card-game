@@ -9,6 +9,8 @@ import Song from "./Song.ts";
 import showMessage from "../helpers/showMessage.ts";
 import type Stack from "./Stack.ts";
 import delay from "../helpers/delay.ts";
+import randomItem from "../helpers/randomItem.ts";
+import Action from "./Action.ts";
 
 let __playerId = 0;
 
@@ -36,6 +38,7 @@ export default class extends EventHandler<Card> {
     isTakingDiscardStack: boolean = false;
     hasPlayedASong: boolean = false;
     completedSongs: Array<boolean> = [false, false, false];
+    selectingCardCallback: Optional<(card: Card) => void>;
 
     constructor(name: string, handCards: Array<Card>, isHuman: boolean = false, uiRoot: HTMLElement, color: string, drawStack: Stack, discardStack: Stack) {
         super();
@@ -49,6 +52,15 @@ export default class extends EventHandler<Card> {
         this.render();
         this.handleCardDraw();
         this.handleTakeDiscardStack();
+    }
+
+    selectCardFromHand(callback: (card: Card) => void) {
+        if (!this.isHuman) {
+            callback(ensure(randomItem(this.handCards)));
+        } else {
+            this.selectingCardCallback = callback;
+            this.render();
+        }
     }
 
     handleCardDraw() {
@@ -72,7 +84,7 @@ export default class extends EventHandler<Card> {
 
     handleTakeDiscardStack() {
         this.discardStack.onClick(() => {
-            if (!this.isActive || !this.isHuman || this.isInEndPhase || this.hasDrawnCard) return;
+            if (!this.isActive || !this.isHuman || this.isInEndPhase || this.hasDrawnCard || this.discardStack.nextCard instanceof Action) return;
             const card = this.discardStack.drawCard();
             if (!card) {
                 showMessage("Der Ablagestapel ist leer.", "error");
@@ -92,7 +104,9 @@ export default class extends EventHandler<Card> {
         this.render();
         if (this.isHuman) {
             this.drawStack.highlighted = true;
-            this.discardStack.highlighted = true;
+            if (!(this.discardStack.nextCard instanceof Action)) { // Action cards cannot be drawn from the discard stack
+                this.discardStack.highlighted = true;
+            }
         }
         return this;
     }
@@ -163,7 +177,7 @@ export default class extends EventHandler<Card> {
         });
         const hasNoSongPlayedYet = this.playedCards.every(zone => zone.length === 0);
         this.handCards.forEach((card, index) => {
-            const cardElement = card.render(this.isHuman ? CardFace.Up : CardFace.Down);
+            const cardElement = card.render(CardFace.Up); // this.isHuman ? CardFace.Up : CardFace.Down);
             cardElement.style.transform = `rotate(${rotationStart + index * rotationPerCard}deg)`;
             cardElement.style.left = `${(index * widthPerCard)}px`;
             // apply some arc offset to the top value
@@ -196,11 +210,16 @@ export default class extends EventHandler<Card> {
                 }
             }
             handCardsElement.appendChild(cardElement);
-            if (this.isInEndPhase || (card instanceof Song && hasNoSongPlayedYet && this.hasDrawnCard)) {
+            if (this.isInEndPhase || this.selectingCardCallback || (card instanceof Song && hasNoSongPlayedYet && this.hasDrawnCard)) {
                 cardElement.classList.add("pulsed");
             }
             cardElement.addEventListener("click", () => {
                 if (this.isTakingDiscardStack || !this.isHuman || !this.isActive) {
+                    return;
+                }
+                if (this.selectingCardCallback) {
+                    this.selectingCardCallback(card);
+                    this.selectingCardCallback = undefined;
                     return;
                 }
                 if (this.isInEndPhase) {
@@ -471,5 +490,46 @@ export default class extends EventHandler<Card> {
         const cardToDiscard = this.handCards[Math.floor(Math.random() * this.handCards.length)];
         this.handCards = this.handCards.filter(c => c !== cardToDiscard);
         this.emit("endTurn", cardToDiscard);
+    }
+
+    discardCard(card: Card) {
+        if (!this.handCards.includes(card)) {
+            showMessage("Diese Karte ist nicht in deiner Hand.", "error");
+            return;
+        }
+        this.handCards = this.handCards.filter(c => c !== card);
+        this.discardStack.addCard(card);
+        if (this.discardStack.nextCard instanceof Action) {
+            this.discardStack.highlighted = false;
+        }
+        this.render();
+    }
+
+    removeHandCardRandomly(): Optional<Card> {
+        if (this.handCards.length === 0) {
+            return undefined;
+        }
+        const randomIndex = Math.floor(Math.random() * this.handCards.length);
+        const card = this.handCards[randomIndex];
+        this.handCards.splice(randomIndex, 1);
+        this.render();
+        return card;
+    }
+
+    giveCard(card: Optional<Card>) {
+        if (!card) {
+            return;
+        }
+        this.handCards.push(card);
+        this.render();
+    }
+
+    drawCard() {
+        const card = this.drawStack.drawCard();
+        if (!card) {
+            showMessage("Der Nachziehstapel ist leer.", "error");
+            return;
+        }
+        this.addHandCards([card]);
     }
 }

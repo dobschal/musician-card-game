@@ -7,6 +7,9 @@ import showMessage from "./helpers/showMessage.ts";
 import Card, {CardFace} from "./classes/Card.ts";
 import delay from "./helpers/delay.ts";
 import type {Optional} from "./classes/Optional.ts";
+import Action from "./classes/Action.ts";
+import {actions} from "./actions.ts";
+import randomItem from "./helpers/randomItem.ts";
 
 
 console.log("Game started...");
@@ -16,6 +19,16 @@ const AMOUNT_START_HAND = 11;
 
 const drawStack = new Stack(allCards, createElement({id: "draw-stack", target: UI_ROOT})).shuffle();
 const discardStack = new Stack([], createElement({id: "discard-stack", target: UI_ROOT}), CardFace.Up);
+
+createElement({
+    target: UI_ROOT,
+    className: "game-info",
+    tag: "button",
+    innerHTML: "Anleitung",
+    onClick() {
+        openTutorial();
+    }
+});
 
 const players = [
     new Player("Du", drawStack.drawCards(AMOUNT_START_HAND), true, createElement({
@@ -35,50 +48,81 @@ const players = [
     }), "green", drawStack, discardStack)
 ];
 
-delay(1000).then(() => {
-    players[0].setActive();
-    showMessage("Ziehe zu Beginn deines Zuges eine Karte.");
+// We want to avoid that players have action cards on their start hand
+// In the real game, those players would immediately play their action cards
+// Here we add the action cards to the draw stack after giving the players
+// their start hand
+actions.forEach((actionCard) => {
+    drawStack.addCard(actionCard);
 });
+drawStack.shuffle();
 
-players.forEach((player) => {
-    player.on("endTurn", async (discardedCard: Card) => {
+delay(2000).then(() => {
+    ensure(randomItem(players)).setActive();
+    showMessage("Ziehe zu Beginn deines Zuges eine Karte.");
 
-        discardStack.addCard(discardedCard);
-        player.setInactive();
-
-        if (player.handCards.length === 0) {
-            showMessage(`${player.name} hat das Spiel beendet!`, "info");
-            let bestPlayer: Optional<Player>;
-            players.forEach((p) => {
-                if (!bestPlayer) {
-                    bestPlayer = p;
-                } else {
-                    if (p.calculatePoints() > bestPlayer.calculatePoints()) {
-                        bestPlayer = p;
-                    }
-                }
-            });
-            alert(`\`${player.name} hat das Spiel beendet! ${bestPlayer?.name} hat gewonnen mit ${bestPlayer?.calculatePoints()} Punkten!`);
+    // Action cards are executed when drawn from the draw stack
+    drawStack.on("draw", (card: Optional<Card>) => {
+        if (!(card instanceof Action)) {
             return;
         }
-
-        const nextPlayer = players[(players.indexOf(player) + 1) % players.length];
-        showMessage(`${nextPlayer.name} ist am Zug!`);
-
-        nextPlayer.setActive();
-        if (!nextPlayer.isHuman) {
-            await nextPlayer.makeBotMoves();
-        } else {
-            await delay(1000);
-            showMessage("Ziehe zu Beginn deines Zuges eine Karte.");
-        }
+        const activePlayer = ensure(players.find((player) => player.isActive));
+        const otherPlayers = players.filter((player) => !player.isActive);
+        card.logic(activePlayer, otherPlayers);
+        activePlayer.discardCard(card);
     });
+
+    players.forEach((player) => {
+
+        // On game start each player plays their action cards
+        // they have on their start hand
+        player.handCards.filter(card => card instanceof Action).forEach((actionCard) => {
+            const otherPlayers = players.filter(p => p !== player);
+            actionCard.logic(player, otherPlayers);
+            player.discardCard(actionCard);
+        });
+
+        player.on("endTurn", async (discardedCard: Card) => {
+
+            discardStack.addCard(discardedCard);
+            player.setInactive();
+
+            if (player.handCards.length === 0) {
+                showMessage(`${player.name} hat das Spiel beendet!`, "info");
+                let bestPlayer: Optional<Player>;
+                players.forEach((p) => {
+                    if (!bestPlayer) {
+                        bestPlayer = p;
+                    } else {
+                        if (p.calculatePoints() > bestPlayer.calculatePoints()) {
+                            bestPlayer = p;
+                        }
+                    }
+                });
+                alert(`\`${player.name} hat das Spiel beendet! ${bestPlayer?.name} hat gewonnen mit ${bestPlayer?.calculatePoints()} Punkten!`);
+                return;
+            }
+
+            const nextPlayer = players[(players.indexOf(player) + 1) % players.length];
+            showMessage(`${nextPlayer.name} ist am Zug!`);
+
+            nextPlayer.setActive();
+            if (!nextPlayer.isHuman) {
+                await nextPlayer.makeBotMoves();
+            } else {
+                await delay(1000);
+                showMessage("Ziehe zu Beginn deines Zuges eine Karte.");
+            }
+        });
+    });
+
 });
 
-createElement({
-    target: UI_ROOT,
-    className: "tutorial",
-    innerHTML: `
+function openTutorial() {
+    createElement({
+        target: UI_ROOT,
+        className: "tutorial",
+        innerHTML: `
         <div>
             <h2>Willkommen zum Spiel Kafümu!</h2>
             <p>Ziel des Kartenspiels Kafümu ist es Songs mit dazugehörigen Musikern und Instrumenten vor sich auszulegen.</p>
@@ -136,6 +180,7 @@ createElement({
             <button onclick="document.querySelector('.tutorial').remove()" style="float:right">Spiel starten</button>
         </div>
     `
-});
+    });
+}
 
 

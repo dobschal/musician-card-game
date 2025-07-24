@@ -1,13 +1,15 @@
 import Card, {CardFace} from "./Card.ts";
 import type {Optional} from "./Optional.ts";
+import EventHandler from "./EventHandler.ts";
 
-export default class {
+export default class extends EventHandler<Optional<Card>> {
     cards: Array<Card>;
     uiRoot: HTMLElement;
     face: CardFace = CardFace.Down;
     _isHighlighted: boolean = false;
 
     constructor(cards: Array<Card>, uiRoot: HTMLElement, face: CardFace = CardFace.Down) {
+        super();
         this.cards = cards;
         this.uiRoot = uiRoot;
         this.face = face;
@@ -21,6 +23,11 @@ export default class {
 
     get highlighted(): boolean {
         return this._isHighlighted;
+    }
+
+    get nextCard(): Optional<Card> {
+        if (this.cards.length === 0) return undefined;
+        return this.cards[this.cards.length - 1];
     }
 
     shuffle() {
@@ -39,6 +46,7 @@ export default class {
 
     drawCard(): Optional<Card> {
         const card = this.cards.pop();
+        this.emit("draw", card);
         this.render();
         return card;
     }

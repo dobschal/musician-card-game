@@ -6,7 +6,6 @@
   "scripts": {
     "start": "vite",
     "build": "tsc && vite build",
-    "server": "node server.js",
     "preview": "vite preview"
   },
   "devDependencies": {
@@ -15,8 +14,5 @@
     "typescript": "~5.8.3",
     "vite": "^7.0.4",
     "vite-plugin-image-optimizer": "^2.0.2"
-  },
-  "dependencies": {
-    "express": "^5.1.0"
   }
 }
