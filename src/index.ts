@@ -58,8 +58,6 @@ actions.forEach((actionCard) => {
 drawStack.shuffle();
 
 delay(2000).then(() => {
-    ensure(randomItem(players)).setActive();
-    showMessage("Ziehe zu Beginn deines Zuges eine Karte.");
 
     // Action cards are executed when drawn from the draw stack
     drawStack.on("draw", (card: Optional<Card>) => {
@@ -82,9 +80,11 @@ delay(2000).then(() => {
             player.discardCard(actionCard);
         });
 
-        player.on("endTurn", async (discardedCard: Card) => {
+        player.on("endTurn", async (discardedCard: Optional<Card>) => {
 
-            discardStack.addCard(discardedCard);
+            if (discardedCard) {
+                discardStack.addCard(discardedCard);
+            }
             player.setInactive();
 
             if (player.handCards.length === 0) {
@@ -115,6 +115,8 @@ delay(2000).then(() => {
             }
         });
     });
+
+    ensure(randomItem(players)).emit("endTurn", undefined);
 
 });
 

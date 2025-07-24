@@ -14,7 +14,7 @@ import Action from "./Action.ts";
 
 let __playerId = 0;
 
-export default class extends EventHandler<Card> {
+export default class extends EventHandler<Optional<Card>> {
     id: number = __playerId++;
     name: string;
     handCards: Array<Card>;
